@@ -9,6 +9,7 @@ import {
   Col,
   Alert,
   Image,
+  Table,
 } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import "./Home.css";
@@ -55,32 +56,35 @@ const Home = () => {
       transactionNumber,
       programmeType,
       programme,
+      "personal details",
       personalDetails,
       netStatus,
+      "net records",
       netRecords,
       degreeStatus,
+      "academic records",
       academicRecords,
       declaration
     );
-    // axios({
-    //   method: "post",
-    //   url: "/application",
-    //   data: {
-    //     transactionNumber: transactionNumber,
-    //     transactionDate: transactionDate,
-    //     transactionAmount: transactionAmount,
-    //     programmeType: programmeType,
-    //     programme: programme,
-    //     personalDetails: personalDetails,
-    //     degreeStatus: degreeStatus,
-    //     academicRecords: academicRecords,
-    //     netStatus: netStatus,
-    //     netRecords: netRecords,
-    //     declaration: declaration,
-    //   },
-    // }).then(async (response) => {
-    //   console.log("response: ", response);
-    // });
+    axios({
+      method: "post",
+      url: "api/application",
+      data: {
+        transactionNumber: transactionNumber,
+        transactionDate: transactionDate,
+        transactionAmount: transactionAmount,
+        programmeType: programmeType,
+        programme: programme,
+        personalDetails: personalDetails,
+        degreeStatus: degreeStatus,
+        academicRecords: academicRecords,
+        netStatus: netStatus,
+        netRecords: netRecords,
+        declaration: declaration,
+      },
+    }).then(async (response) => {
+      console.log("response: ", response);
+    });
   };
 
   return (
@@ -306,6 +310,208 @@ const Home = () => {
                 </Form.Group>
               </Row>
             </Form>
+          </Card.Body>
+        </Card>
+        <Card>
+          <CardHeader>Details of Academic Records</CardHeader>
+          <Card.Body>
+            <Form>
+              <div onChange={(e) => setDegreeStatus(e.target.value)}>
+                <Form.Check
+                  type="radio"
+                  label="Master Degree completed with &gt; 60%"
+                  name="formHorizontalRadios1"
+                  // id="formHorizontalRadios1"
+                  value="true"
+                />
+                <Form.Check
+                  type="radio"
+                  label="Awaited for the Result [Upload last 3 semester Marksheet]"
+                  name="formHorizontalRadios1"
+                  // id="formHorizontalRadios2"
+                  value="false"
+                />
+              </div>
+              {/* <div onChange={(e) => setProgramme(e.target.value)}>
+                <Form.Check.Input
+                  type={"radio"}
+                  isValid
+                  name="formHorizontalRadios1"
+                  className="mb-3"
+                  value="true"
+                />
+                <Form.Check.Label>
+                  Master Degree completed with &gt; 60%
+                </Form.Check.Label>
+                <br />
+                <Form.Check.Input
+                  type={"radio"}
+                  isValid
+                  name="formHorizontalRadios1"
+                  className="mb-3"
+                  value="false"
+                />
+                <Form.Check.Label>
+                  Awaited for the Result [Upload last 3 semester Marksheet]
+                </Form.Check.Label>
+              </div> */}
+            </Form>
+            <Table bordered hover>
+              <thead>
+                <tr>
+                  <th>Qualifying Degree Name</th>
+                  <th>University Name</th>
+                  <th>Year of Passing</th>
+                  <th>% or CGPA</th>
+                  <th>
+                    Upload Degree Certificate / Last 3 Semester Marksheet{" "}
+                    <span style={{ color: "red" }}>[Upload only JPG/JPEG]</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <Form.Control
+                      type="text"
+                      placeholder="Qualifying Degree"
+                      onChange={(e) => {
+                        let newDetails = { ...academicRecords };
+                        newDetails.degree = e.target.value;
+                        setAcademicRecords(newDetails);
+                      }}
+                    />
+                  </td>
+                  <td>
+                    <Form.Control
+                      type="text"
+                      placeholder="University Name"
+                      onChange={(e) => {
+                        let newDetails = { ...academicRecords };
+                        newDetails.university = e.target.value;
+                        setAcademicRecords(newDetails);
+                      }}
+                    />
+                  </td>
+                  <td>
+                    <Form.Control
+                      type="text"
+                      placeholder="Year of Passing"
+                      onChange={(e) => {
+                        let newDetails = { ...academicRecords };
+                        newDetails.yearOfPassing = e.target.value;
+                        setAcademicRecords(newDetails);
+                      }}
+                    />
+                  </td>
+                  <td>
+                    <Form.Control
+                      type="text"
+                      placeholder="% or CGPA"
+                      onChange={(e) => {
+                        let newDetails = { ...academicRecords };
+                        newDetails.cgpa = e.target.value;
+                        setAcademicRecords(newDetails);
+                      }}
+                    />
+                  </td>
+                  <td>
+                    <Form.Control type="file" />
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </Card.Body>
+        </Card>
+        <Card>
+          <CardHeader>National Eligibility Test</CardHeader>
+          <Card.Body>
+            <Form>
+              <div onChange={(e) => setNetStatus(e.target.value)}>
+                <Form.Check
+                  type="radio"
+                  label="YES"
+                  name="formHorizontalRadios2"
+                  // id="formHorizontalRadios1"
+                  value="YES"
+                />
+                <Form.Check
+                  type="radio"
+                  label="NO"
+                  name="formHorizontalRadios2"
+                  // id="formHorizontalRadios2"
+                  value="NO"
+                />
+              </div>
+              {/* <Form.Check.Input type={"radio"} isValid className="mb-3" />
+              <Form.Check.Label>YES</Form.Check.Label>
+              <br />
+              <Form.Check.Input type={"radio"} isValid className="mb-3" />
+              <Form.Check.Label>NO</Form.Check.Label> */}
+            </Form>
+            <Table bordered hover>
+              <thead>
+                <tr>
+                  <th>Name of Examination</th>
+                  <th>Score/Percentile</th>
+                  <th>Validity Period (If Applicable)</th>
+                  <th>
+                    Upload Score Card
+                    <span style={{ color: "red" }}>[Upload only JPG/JPEG]</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <Form.Control
+                      onChange={(e) => {
+                        let newDetails = { ...netRecords };
+                        newDetails.examName = e.target.value;
+                        setNetRecords(newDetails);
+                      }}
+                      type="text"
+                      placeholder="Name of Examination"
+                    />
+                  </td>
+                  <td>
+                    <Form.Control
+                      type="text"
+                      placeholder="Score/Percentile"
+                      onChange={(e) => {
+                        let newDetails = { ...netRecords };
+                        newDetails.score = e.target.value;
+                        setNetRecords(newDetails);
+                      }}
+                    />
+                  </td>
+                  <td>
+                    <Form.Control
+                      type="text"
+                      placeholder="Validity Period"
+                      onChange={(e) => {
+                        let newDetails = { ...netRecords };
+                        newDetails.validity = e.target.value;
+                        setNetRecords(newDetails);
+                      }}
+                    />
+                  </td>
+                  <td>
+                    <Form.Control type="file" />
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </Card.Body>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            Upload Applicant Signature <br />
+            <span style={{ color: "red" }}>[Upload only JPG/JPEG]</span>
+          </CardHeader>
+          <Card.Body>
+            <Form.Control type="file" />
           </Card.Body>
         </Card>
         <Card>

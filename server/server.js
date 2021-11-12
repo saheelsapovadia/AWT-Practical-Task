@@ -14,6 +14,16 @@ const PORT = process.env.PORT || 4000;
 // Connect to database
 connectDB();
 
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With,X-Auth-Token, Content-Type, Accept",
+//     "Authorization"
+//   );
+//   next();
+// });
+
 app.get("/", (req, res) => {
   res.send("Server is running");
 });

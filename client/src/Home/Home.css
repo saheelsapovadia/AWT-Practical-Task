@@ -7,3 +7,28 @@
 .card {
 	margin-bottom: 30px;
 }
+
+.pay{
+	width: 700px;
+}
+
+.phd{
+	width: 350px;
+}
+
+
+.user{
+	height: 110px;
+	width: 110px;
+	margin-left: 200px;
+	border:2px solid #000;
+	box-shadow: 10px 10px 10px 10px #ccc;
+      -moz-box-shadow: 10px 10px 5px #ccc;
+      -webkit-box-shadow: 10px 10px 5px #ccc;
+      -khtml-box-shadow: 10px 10px 5px #ccc;
+}
+
+.upload{
+	margin-left: 200px;
+	margin-top: 20px;
+}

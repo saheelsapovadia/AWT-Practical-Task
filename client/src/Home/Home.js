@@ -202,6 +202,9 @@ const Home = () => {
 							</tbody>
 						</Table>
 					</Card.Body>
+					<div>
+						<Button variant="outline-success">Add Row</Button>
+					</div>
 				</Card>
 
 				<Card>
@@ -247,6 +250,9 @@ const Home = () => {
 							</tbody>
 						</Table>
 					</Card.Body>
+					<div>
+						<Button variant="outline-success">Add Row</Button>
+					</div>
 				</Card>
 
 				<Card>
@@ -277,12 +283,9 @@ const Home = () => {
 				<span style={{ color: "red" }}>CLICK ONLY ONCE</span>
 			</div>
 
-			<Navbar bg="dark" expand="md" variant="dark">
-				<Container fluid>
-					<Navbar.Brand href="#">CHARUSAT - PhD Admission Portal</Navbar.Brand>
-					<Button variant="outline-success">Logout</Button>
-				</Container>
-			</Navbar>
+			<div className="footer">
+				<p style={{ margin: "0" }}>CHARUSAT - PhD Admission Portal</p>
+			</div>
 		</>
 	);
 };

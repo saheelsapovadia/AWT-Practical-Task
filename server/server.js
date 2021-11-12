@@ -24,6 +24,8 @@ connectDB();
 //   next();
 // });
 
+app.use("/api/application", applicationRoutes);
+
 app.get("/", (req, res) => {
   res.send("Server is running");
 });
@@ -86,7 +88,6 @@ app.get("/", (req, res) => {
 //
 //
 //
-app.use("/api/application", applicationRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

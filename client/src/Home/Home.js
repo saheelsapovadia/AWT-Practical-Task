@@ -12,13 +12,14 @@ import {
   Table,
 } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
+import toast, { Toaster } from "react-hot-toast";
 import "./Home.css";
 import axios from "axios";
 
 const Home = () => {
   const [transactionNumber, setTransactionNumber] = useState();
   const [transactionDate, setTransactionDate] = useState();
-  const [transactionAmount, setTransactionAmount] = useState(1500);
+  const [transactionAmount, setTransactionAmount] = useState("1500");
   const [programmeType, setProgrammeType] = useState();
   const [programme, setProgramme] = useState();
   const [personalDetails, setPersonalDetails] = useState({
@@ -27,75 +28,69 @@ const Home = () => {
     addressLine1: "",
     addressLine2: "",
     city: "",
-    pinCode: "",
+    pincode: "",
     state: "",
     country: "INDIA",
   });
   const [degreeStatus, setDegreeStatus] = useState();
-  const [academicRecords, setAcademicRecords] = useState([
-    {
-      degree: "",
-      university: "",
-      yearOfPassing: "",
-      cgpa: "",
-    },
-  ]);
+  const [academicRecords, setAcademicRecords] = useState({
+    degree: "",
+    university: "",
+    yearOfPassing: "",
+    cgpa: "",
+  });
   const [netStatus, setNetStatus] = useState(); //bool
-  const [netRecords, setNetRecords] = useState([
-    {
-      examName: "",
-      score: "",
-      validity: "", //bool
-    },
-  ]);
+  const [netRecords, setNetRecords] = useState({
+    examName: "",
+    score: "",
+    validity: "", //bool
+  });
   const [declaration, setDeclaration] = useState(); //bool
 
   const onSubmitHandler = () => {
-    console.log(
-      transactionDate,
-      transactionNumber,
-      programmeType,
-      programme,
-      "personal details",
-      personalDetails,
-      netStatus,
-      "net records",
-      netRecords,
-      degreeStatus,
-      "academic records",
-      academicRecords,
-      declaration
-    );
-    axios({
-      method: "post",
-      url: "api/application",
-      data: {
-        transactionNumber: transactionNumber,
-        transactionDate: transactionDate,
-        transactionAmount: transactionAmount,
-        programmeType: programmeType,
-        programme: programme,
-        personalDetails: personalDetails,
-        degreeStatus: degreeStatus,
-        academicRecords: academicRecords,
-        netStatus: netStatus,
-        netRecords: netRecords,
-        declaration: declaration,
+    toast.promise(
+      axios({
+        method: "post",
+        url: "api/application",
+        data: {
+          transactionNumber: transactionNumber,
+          transactionDate: transactionDate,
+          transactionAmount: transactionAmount,
+          programmeType: programmeType,
+          programme: programme,
+          personalDetails: personalDetails,
+          degreeStatus: degreeStatus,
+          academicRecords: academicRecords,
+          netStatus: netStatus,
+          netRecords: netRecords,
+          declaration: declaration,
+        },
+      }).then(async (response) => {
+        console.log("response: ", response);
+      }),
+      {
+        loading: "Submitting...", //when posting
+        success: "Application Submitted", //if post is success
+        error: "Submission Failed!", //when post is failed
       },
-    }).then(async (response) => {
-      console.log("response: ", response);
-    });
+      {
+        style: {
+          fontFamily: "Monospace",
+          marginTop: "15px",
+        },
+      }
+    );
   };
 
   return (
     <>
+      <Toaster />
       <Navbar bg="dark" expand="md" variant="dark">
         <Container fluid>
-          <Navbar.Brand href="#">CHARUSAT - PhD Admission</Navbar.Brand>
+          <Navbar.Brand href="/">CHARUSAT - PhD Admission</Navbar.Brand>
           <Button variant="outline-success">Logout</Button>
         </Container>
       </Navbar>
-
       <div className="card-container">
         <Card className="payment-width  card-margin">
           <CardHeader className="payment-header">
@@ -122,14 +117,20 @@ const Home = () => {
                   name="date_of_birth"
                   onChange={(e) => {
                     setTransactionDate(e.target.value);
-                    console.log(transactionDate);
                   }}
                 ></Form.Control>
               </Form.Group>
 
               <Form.Group>
                 <Form.Label>Amount Rs.</Form.Label>
-                <Form.Control type="text" placeholder="1500" readOnly />
+                <Form.Control
+                  type="text"
+                  placeholder="1500"
+                  readOnly
+                  onClick={(e) => {
+                    setTransactionAmount(e.target.value);
+                  }}
+                />
               </Form.Group>
 
               <Form.Group>
@@ -229,9 +230,9 @@ const Home = () => {
                       }}
                     >
                       <option>--Choose Gender--</option>
-                      <option value="1">Male</option>
-                      <option value="2">Female</option>
-                      <option value="3">Others</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Others">Others</option>
                     </Form.Select>
                   </Form.Group>
                 </Col>
@@ -283,7 +284,7 @@ const Home = () => {
                     placeholder="Zip"
                     onChange={(e) => {
                       let newDetails = { ...personalDetails };
-                      newDetails.pinCode = e.target.value;
+                      newDetails.pincode = e.target.value;
                       setPersonalDetails(newDetails);
                     }}
                   />
@@ -322,14 +323,14 @@ const Home = () => {
                   label="Master Degree completed with &gt; 60%"
                   name="formHorizontalRadios1"
                   // id="formHorizontalRadios1"
-                  value="true"
+                  value="Master Degree completed with &gt; 60%"
                 />
                 <Form.Check
                   type="radio"
-                  label="Awaited for the Result [Upload last 3 semester Marksheet]"
+                  label="Awaited for the Result [Upload last semester Marksheet]"
                   name="formHorizontalRadios1"
                   // id="formHorizontalRadios2"
-                  value="false"
+                  value="Awaited for the Result [Upload last semester Marksheet]"
                 />
               </div>
               {/* <div onChange={(e) => setProgramme(e.target.value)}>
@@ -516,7 +517,7 @@ const Home = () => {
         </Card>
         <Card>
           <CardHeader>Declaration</CardHeader>
-          <Card.Body>
+          <Card.Body className="selfDeclaration">
             <Form.Check.Input
               type={"checkbox"}
               isValid
@@ -536,6 +537,16 @@ const Home = () => {
         <Button variant="outline-success" onClick={onSubmitHandler}>
           Submit
         </Button>
+      </div>
+      <div className="footer">
+        <p style={{ margin: "0" }}>CHARUSAT - PhD Admission Portal</p>
+        <p
+          style={{
+            fontSize: "0.7em",
+          }}
+        >
+          Made by G16 - 19CE044,55,97,127,141
+        </p>
       </div>
     </>
   );

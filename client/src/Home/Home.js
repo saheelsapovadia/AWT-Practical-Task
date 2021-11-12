@@ -205,6 +205,51 @@ const Home = () => {
 				</Card>
 
 				<Card>
+					<CardHeader>National Eligibility Test</CardHeader>
+					<Card.Body>
+						<Form>
+							<Form.Check.Input type={"radio"} isValid className="mb-3" />
+							<Form.Check.Label>YES</Form.Check.Label>
+							<br />
+							<Form.Check.Input type={"radio"} isValid className="mb-3" />
+							<Form.Check.Label>NO</Form.Check.Label>
+						</Form>
+						<Table bordered hover>
+							<thead>
+								<tr>
+									<th>Name of Examination</th>
+									<th>Score/Percentile</th>
+									<th>Validity Period (If Applicable)</th>
+									<th>
+										Upload Score Card
+										<span style={{ color: "red" }}>[Upload only JPG/JPEG]</span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<Form.Control
+											type="text"
+											placeholder="Name of Examination"
+										/>
+									</td>
+									<td>
+										<Form.Control type="text" placeholder="Score/Percentile" />
+									</td>
+									<td>
+										<Form.Control type="text" placeholder="Validity Period" />
+									</td>
+									<td>
+										<Form.Control type="file" />
+									</td>
+								</tr>
+							</tbody>
+						</Table>
+					</Card.Body>
+				</Card>
+
+				<Card>
 					<CardHeader>
 						Upload Applicant Signature <br />
 						<span style={{ color: "red" }}>[Upload only JPG/JPEG]</span>
@@ -227,9 +272,10 @@ const Home = () => {
 					</Card.Body>
 				</Card>
 			</div>
-
-			<Button variant="outline-success">Submit Application</Button>
-			<span style={{ color: "red" }}>CLICK ONLY ONCE</span>
+			<div className="btn-submit">
+				<Button variant="outline-success">Submit Application</Button>
+				<span style={{ color: "red" }}>CLICK ONLY ONCE</span>
+			</div>
 
 			<Navbar bg="dark" expand="md" variant="dark">
 				<Container fluid>

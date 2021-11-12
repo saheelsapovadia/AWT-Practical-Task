@@ -7,3 +7,8 @@
 .card {
 	margin-bottom: 30px;
 }
+
+.btn-submit {
+	justify-content: center;
+	align-items: center;
+}

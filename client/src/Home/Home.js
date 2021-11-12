@@ -1,11 +1,18 @@
 import React from "react";
-import {Form, Button, Card, Container,Row} from 'react-bootstrap';
+import {Form, Button, Card, Container,Row, Navbar} from 'react-bootstrap';
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import "./Home.css";
 
 
 const Home = () => {
   return(
+    <>
+    <Navbar bg="dark" expand="md" variant="dark">
+                <Container fluid>
+                    <Navbar.Brand href="#">CHARUSAT - PhD Admission</Navbar.Brand>
+                    <Button variant="outline-success">Logout</Button>
+                </Container>
+      </Navbar>
     <Container>
       
       <Card  className="payment-width  card-margin">
@@ -63,6 +70,13 @@ const Home = () => {
       </Card>
       
     </Container>
+    <Navbar bg="dark" expand="md" variant="dark">
+                <Container fluid>
+                    <Navbar.Brand href="#">CHARUSAT - PhD Admission</Navbar.Brand>
+                    <Button variant="outline-success">Logout</Button>
+                </Container>
+      </Navbar>
+    </>
   ) 
 };
 

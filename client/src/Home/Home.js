@@ -12,11 +12,10 @@ const Home = () => {
 					<Button variant="outline-success">Logout</Button>
 				</Container>
 			</Navbar>
-			<Container>
-				<Card className="payment-width  card-margin">
-					<CardHeader className="payment-header">
-						Payment Information
-					</CardHeader>
+
+			<div className="card-container">
+				<Card>
+					<CardHeader>Payment Information</CardHeader>
 					<Card.Body>
 						<Form>
 							<Form.Group
@@ -47,10 +46,8 @@ const Home = () => {
 					</Card.Body>
 				</Card>
 
-				<Card className="payment-width card-margin">
-					<CardHeader className="payment-header">
-						Payment Information
-					</CardHeader>
+				<Card>
+					<CardHeader>Payment Information</CardHeader>
 					<Card.Body>
 						<Form>
 							<Form.Group
@@ -80,13 +77,7 @@ const Home = () => {
 						</Form>
 					</Card.Body>
 				</Card>
-			</Container>
-			<Navbar bg="dark" expand="md" variant="dark">
-				<Container fluid>
-					<Navbar.Brand href="#">CHARUSAT - PhD Admission</Navbar.Brand>
-					<Button variant="outline-success">Logout</Button>
-				</Container>
-			</Navbar>
+			</div>
 		</>
 	);
 };

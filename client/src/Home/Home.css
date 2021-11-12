@@ -1,15 +1,9 @@
-.card-margin{
-    margin-bottom: 1rem;
+.card-container {
+	min-width: 60vw;
+	max-width: 70vw;
+	margin: 10px;
 }
 
-.payment-width{
-    width: 40rem;
-    
-}
-
-.payment-header{
-    background-color:#F5F5F5;    
-    text-align: center;
-    font-size: larger;
-    font-weight: 500;
+.card {
+	margin-bottom: 30px;
 }

@@ -16,7 +16,7 @@ const academicRecordSchema = mongoose.Schema(
       required: true,
     },
     passingYear: {
-      type: String,
+      type: Number,
       required: true,
     },
     cgpa: {

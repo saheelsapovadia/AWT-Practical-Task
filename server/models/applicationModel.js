@@ -2,7 +2,39 @@ const mongoose = require("mongoose");
 
 const applicationSchema = mongoose.Schema(
   {
-    transactionNo: {
+    name: {
+      type: String,
+      required: true,
+    },
+    gender: {
+      type: String,
+      required: true,
+    },
+    addressLine1: {
+      type: String,
+      required: true,
+    },
+    addressLine2: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
+    country: {
+      type: String,
+      required: true,
+    },
+    pincode: {
+      type: String,
+      required: true,
+    },
+    transactionNumber: {
       type: String,
       required: true,
     },
@@ -27,8 +59,16 @@ const applicationSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    academicRecords: {
+      type: Array,
+      required: true,
+    },
     netStatus: {
       type: String,
+      required: true,
+    },
+    netRecords: {
+      type: Array,
       required: true,
     },
   },

@@ -50,26 +50,32 @@ const Home = () => {
   const [declaration, setDeclaration] = useState(); //bool
 
   const onSubmitHandler = () => {
-    console.log(transactionDate, transactionNumber);
-    axios({
-      method: "post",
-      url: "/application",
-      data: {
-        transactionNumber: transactionNumber,
-        transactionDate: transactionDate,
-        transactionAmount: transactionAmount,
-        programmeType: programmeType,
-        programme: programme,
-        personalDetails: personalDetails,
-        degreeStatus: degreeStatus,
-        academicRecords: academicRecords,
-        netStatus: netStatus,
-        netRecords: netRecords,
-        declaration: declaration,
-      },
-    }).then(async (response) => {
-      console.log("response: ", response);
-    });
+    console.log(
+      transactionDate,
+      transactionNumber,
+      programmeType,
+      programme,
+      personalDetails
+    );
+    // axios({
+    //   method: "post",
+    //   url: "/application",
+    //   data: {
+    //     transactionNumber: transactionNumber,
+    //     transactionDate: transactionDate,
+    //     transactionAmount: transactionAmount,
+    //     programmeType: programmeType,
+    //     programme: programme,
+    //     personalDetails: personalDetails,
+    //     degreeStatus: degreeStatus,
+    //     academicRecords: academicRecords,
+    //     netStatus: netStatus,
+    //     netRecords: netRecords,
+    //     declaration: declaration,
+    //   },
+    // }).then(async (response) => {
+    //   console.log("response: ", response);
+    // });
   };
 
   return (
@@ -96,7 +102,6 @@ const Home = () => {
                 <Form.Control
                   onChange={(e) => {
                     setTransactionNumber(e.target.value);
-                    console.log(transactionNumber);
                   }}
                 />
               </Form.Group>
@@ -137,18 +142,22 @@ const Home = () => {
             <Form>
               <Form.Group as={Row} className="mb-3">
                 <Col sm={10}>
-                  <Form.Check
-                    type="radio"
-                    label="Full-Time"
-                    name="formHorizontalRadios"
-                    id="formHorizontalRadios1"
-                  />
-                  <Form.Check
-                    type="radio"
-                    label="Part-Time"
-                    name="formHorizontalRadios"
-                    id="formHorizontalRadios2"
-                  />
+                  <div onChange={(e) => setProgrammeType(e.target.value)}>
+                    <Form.Check
+                      type="radio"
+                      label="Full-Time"
+                      name="formHorizontalRadios"
+                      id="formHorizontalRadios1"
+                      value="Full-time"
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="Part-Time"
+                      name="formHorizontalRadios"
+                      id="formHorizontalRadios2"
+                      value="Part-time"
+                    />
+                  </div>
                 </Col>
               </Form.Group>
             </Form>
@@ -159,12 +168,18 @@ const Home = () => {
           <CardHeader>Ph.D Programme</CardHeader>
           <Card.Body>
             <Form>
-              <Form.Select aria-label="Default select example" type="text">
+              <Form.Select
+                aria-label="Default select example"
+                type="text"
+                onChange={(e) => setProgramme(e.target.value)}
+              >
                 <option>--Select Faculty for Programme--</option>
-                <option value="1">Dr. Ritesh Patel</option>
-                <option value="2">Mr. Ronak Patel</option>
-                <option value="3">Mr. Mugendra Rahevar</option>
-                <option value="4">Mr Martin Parmar</option>
+                <option value="Dr. Ritesh Patel">Dr. Ritesh Patel</option>
+                <option value="Mr. Ronak Patel">Mr. Ronak Patel</option>
+                <option value="Mr. Mugendra Rahevar">
+                  Mr. Mugendra Rahevar
+                </option>
+                <option value="Mr Martin Parmar">Mr Martin Parmar</option>
               </Form.Select>
             </Form>
           </Card.Body>
@@ -181,7 +196,13 @@ const Home = () => {
                     <Form.Label className>
                       Name of the Candidate[as in Qualifying degree certificate]
                     </Form.Label>
-                    <Form.Control />
+                    <Form.Control
+                      onChange={(e) => {
+                        let newDetails = { ...personalDetails };
+                        newDetails.name = e.target.value;
+                        setPersonalDetails(newDetails);
+                      }}
+                    />
                   </Form.Group>
                 </Col>
                 <Col>
@@ -195,6 +216,11 @@ const Home = () => {
                     <Form.Select
                       aria-label="Default select example"
                       type="text"
+                      onChange={(e) => {
+                        let newDetails = { ...personalDetails };
+                        newDetails.gender = e.target.value;
+                        setPersonalDetails(newDetails);
+                      }}
                     >
                       <option>--Choose Gender--</option>
                       <option value="1">Male</option>
@@ -211,27 +237,62 @@ const Home = () => {
               <hr></hr>
               <h3>Address Details</h3>
               <Form.Group className="mb-3" controlId="formGridAddress1">
-                <Form.Label>Address</Form.Label>
-                <Form.Control placeholder="1234 Main St" />
+                <Form.Label>Address Line 1</Form.Label>
+                <Form.Control
+                  placeholder="1234 Main St"
+                  onChange={(e) => {
+                    let newDetails = { ...personalDetails };
+                    newDetails.addressLine1 = e.target.value;
+                    setPersonalDetails(newDetails);
+                  }}
+                />
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formGridAddress2">
-                <Form.Label>Address 2</Form.Label>
-                <Form.Control placeholder="Apartment, studio, or floor" />
+                <Form.Label>Address Line 2</Form.Label>
+                <Form.Control
+                  placeholder="Apartment, studio, or floor"
+                  onChange={(e) => {
+                    let newDetails = { ...personalDetails };
+                    newDetails.addressLine2 = e.target.value;
+                    setPersonalDetails(newDetails);
+                  }}
+                />
               </Form.Group>
 
               <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridCity">
-                  <Form.Control placeholder="City" />
+                  <Form.Control
+                    placeholder="City"
+                    onChange={(e) => {
+                      let newDetails = { ...personalDetails };
+                      newDetails.city = e.target.value;
+                      setPersonalDetails(newDetails);
+                    }}
+                  />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridZip">
-                  <Form.Control placeholder="Zip" />
+                  <Form.Control
+                    placeholder="Zip"
+                    onChange={(e) => {
+                      let newDetails = { ...personalDetails };
+                      newDetails.pinCode = e.target.value;
+                      setPersonalDetails(newDetails);
+                    }}
+                  />
                 </Form.Group>
               </Row>
               <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridState">
-                  <Form.Control placeholder="State" />
+                  <Form.Control
+                    placeholder="State"
+                    onChange={(e) => {
+                      let newDetails = { ...personalDetails };
+                      newDetails.state = e.target.value;
+                      setPersonalDetails(newDetails);
+                    }}
+                  />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridCountry">

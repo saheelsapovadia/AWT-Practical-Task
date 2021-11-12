@@ -1,16 +1,33 @@
-.card-margin{
-    margin-bottom: 1rem;
+.card-container {
+  min-width: 60vw;
+  max-width: 70vw;
+  margin: 10px;
 }
 
-
-.payment-width{
-    width: 40rem;
-    
+.card {
+  margin-bottom: 30px;
 }
 
-.payment-header{
-    background-color:#F5F5F5;    
-    text-align: center;
-    font-size: larger;
-    font-weight: 500;
+.pay {
+  width: 700px;
+}
+
+.phd {
+  width: 350px;
+}
+
+.user {
+  height: 110px;
+  width: 110px;
+  margin-left: 200px;
+  border: 2px solid #000;
+  box-shadow: 10px 10px 10px 10px #ccc;
+  -moz-box-shadow: 10px 10px 5px #ccc;
+  -webkit-box-shadow: 10px 10px 5px #ccc;
+  -khtml-box-shadow: 10px 10px 5px #ccc;
+}
+
+.upload {
+  margin-left: 200px;
+  margin-top: 20px;
 }

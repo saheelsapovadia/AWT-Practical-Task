@@ -8,6 +8,7 @@ import {
 	Alert,
 	Row,
 	Col,
+	Table,
 } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import "./Home.css";
@@ -150,6 +151,56 @@ const Home = () => {
 								</Col>
 							</Row>
 						</Form>
+					</Card.Body>
+				</Card>
+
+				<Card>
+					<CardHeader>Details of Academic Records</CardHeader>
+					<Card.Body>
+						<Form>
+							<Form.Check.Input type={"radio"} isValid className="mb-3" />
+							<Form.Check.Label>
+								Master Degree completed with &gt; 60%
+							</Form.Check.Label>
+							<br />
+							<Form.Check.Input type={"radio"} isValid className="mb-3" />
+							<Form.Check.Label>
+								Awaited for the Result [Upload last 3 semester Marksheet]
+							</Form.Check.Label>
+						</Form>
+						<Table bordered hover>
+							<thead>
+								<tr>
+									<th>Qualifying Degree Name</th>
+									<th>University Name</th>
+									<th>Year of Passing</th>
+									<th>% or CGPA</th>
+									<th>
+										Upload Degree Certificate / Last 3 Semester Marksheet{" "}
+										<span style={{ color: "red" }}>[Upload only JPG/JPEG]</span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<Form.Control type="text" placeholder="Qualifying Degree" />
+									</td>
+									<td>
+										<Form.Control type="text" placeholder="University Name" />
+									</td>
+									<td>
+										<Form.Control type="text" placeholder="Year of Passing" />
+									</td>
+									<td>
+										<Form.Control type="text" placeholder="% or CGPA" />
+									</td>
+									<td>
+										<Form.Control type="file" />
+									</td>
+								</tr>
+							</tbody>
+						</Table>
 					</Card.Body>
 				</Card>
 

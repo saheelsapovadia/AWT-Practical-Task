@@ -7,9 +7,9 @@ import axios from "axios";
 const Home = () => {
   const [transactionNumber, setTransactionNumber] = useState();
   const [transactionDate, setTransactionDate] = useState();
-  const [amount, setAmount] = useState(1500);
+  const [transactionAmount, setTransactionAmount] = useState(1500);
   const [programmeType, setProgrammeType] = useState();
-  const [phdProgramme, setPhdProgramme] = useState();
+  const [programme, setProgramme] = useState();
   const [personalDetails, setPersonalDetails] = useState({
     name: "",
     gender: "",
@@ -21,29 +21,33 @@ const Home = () => {
     country: "INDIA",
   });
   const [degreeStatus, setDegreeStatus] = useState();
-  const [degree, setDegree] = useState({
-    degree: "",
-    university: "",
-    yearOfPassing: "",
-    cgpa: "",
-  });
-  const [NET, setNET] = useState(); //bool
-  const [examination, setExamination] = useState({
-    examination: "",
-    score: "",
-    applicable: "", //bool
-  });
+  const [academicRecords, setAcademicRecords] = useState([
+    {
+      degree: "",
+      university: "",
+      yearOfPassing: "",
+      cgpa: "",
+    },
+  ]);
+  const [netStatus, setNetStatus] = useState(); //bool
+  const [netRecords, setNetRecords] = useState([
+    {
+      examName: "",
+      score: "",
+      validity: "", //bool
+    },
+  ]);
   const [declaration, setDeclaration] = useState(); //bool
 
   const onSubmitHandler = () => {
     console.log(transactionDate, transactionNumber);
     axios({
       method: "post",
-      url: "/application-submit",
+      url: "/application",
       data: {
         transactionNumber: transactionNumber,
         transactionDate: transactionDate,
-        amount: amount,
+        transactionAmount: transactionAmount,
         programmeType: programmeType,
         phdProgramme: phdProgramme,
         personalDetails: personalDetails,

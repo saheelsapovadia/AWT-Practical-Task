@@ -55,7 +55,12 @@ const Home = () => {
       transactionNumber,
       programmeType,
       programme,
-      personalDetails
+      personalDetails,
+      netStatus,
+      netRecords,
+      degreeStatus,
+      academicRecords,
+      declaration
     );
     // axios({
     //   method: "post",
@@ -129,9 +134,6 @@ const Home = () => {
                 <span style={{ color: "red" }}>[Upload only JPG/JPEG]</span>
                 <Form.Control type="file" />
               </Form.Group>
-              <Button variant="outline-success" onClick={onSubmitHandler}>
-                Submit
-              </Button>
             </Form>
           </Card.Body>
         </Card>
@@ -306,6 +308,28 @@ const Home = () => {
             </Form>
           </Card.Body>
         </Card>
+        <Card>
+          <CardHeader>Declaration</CardHeader>
+          <Card.Body>
+            <Form.Check.Input
+              type={"checkbox"}
+              isValid
+              className="mb-3"
+              onClick={(e) => {
+                setDeclaration(e.target.checked);
+              }}
+            />
+            <Form.Check.Label>
+              I declare that all information provided by me in the application
+              is true to the best of my knowledge and belief. I understand that
+              i am liable for prosecution if any of the information is found to
+              be false at any time in future,
+            </Form.Check.Label>
+          </Card.Body>
+        </Card>
+        <Button variant="outline-success" onClick={onSubmitHandler}>
+          Submit
+        </Button>
       </div>
     </>
   );

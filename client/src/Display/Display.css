@@ -1,0 +1,24 @@
+.card-container {
+	min-width: 60vw;
+	max-width: 70vw;
+	margin: 10px;
+}
+
+.card {
+	margin-bottom: 30px;
+}
+
+.btn-submit {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.footer {
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	background-color: black;
+	text-align: center;
+}

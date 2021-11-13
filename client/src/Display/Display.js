@@ -1,162 +1,184 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import {
-	Form,
-	Button,
-	Card,
-	Container,
-	Navbar,
-	Alert,
-	Row,
-	Col,
-	Table,
+  Form,
+  Button,
+  Card,
+  Container,
+  Navbar,
+  Row,
+  Col,
 } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
+import { useParams } from "react-router-dom";
 import "./Display.css";
 
-const Home = () => {
-	return (
-		<>
-			<Navbar bg="dark" expand="md" variant="dark">
-				<Container fluid>
-					<Navbar.Brand href="#">CHARUSAT - PhD Admission</Navbar.Brand>
-					<Button variant="outline-success">Logout</Button>
-				</Container>
-			</Navbar>
+const Display = () => {
+  const { id } = useParams();
+  const [appData, setAppData] = useState();
 
-			<div className="card-container">
-				<Card>
-					<CardHeader>Payment Information</CardHeader>
-					<Card.Body>
-						<Form>
-							<Form.Group className="mb-3">
-								<Form.Label>Transaction Number : </Form.Label>
-								<br />
-								123456789
-							</Form.Group>
+  useEffect(() => {
+    const fetchParamsApp = async () => {
+      try {
+        const { data } = await axios.get(`/api/application/${id}`);
+        console.log(data);
+        setAppData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchParamsApp();
+  }, [id]);
 
-							<Form.Group className="mb-3">
-								<Form.Label>Transaction Date : </Form.Label>
-								<br />
-								01-10-2021
-							</Form.Group>
+  return (
+    <>
+      <Navbar bg="dark" expand="md" variant="dark">
+        <Container fluid>
+          <Navbar.Brand href="/">CHARUSAT - PhD Admission</Navbar.Brand>
+          <Button variant="outline-success">Logout</Button>
+        </Container>
+      </Navbar>
 
-							<Form.Group className="mb-3">
-								<Form.Label>Amount Rs.</Form.Label>
-								<br />
-								1500
-							</Form.Group>
-						</Form>
-					</Card.Body>
-				</Card>
+      <div className="card-container">
+        <Card>
+          <CardHeader>Payment Information</CardHeader>
+          <Card.Body>
+            <Form>
+              <Form.Group className="mb-3">
+                <Form.Label>Transaction Number : </Form.Label>
+                <br />
+                {appData?.transactionNumber}
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Transaction Date : </Form.Label>
+                <br />
+                {appData?.transactionDate.slice(0, 10)}
+              </Form.Group>
 
-				<Card>
-					<CardHeader>Ph.D. Programme Type</CardHeader>
-					<Card.Body>FULL TIME</Card.Body>
-				</Card>
+              <Form.Group className="mb-3">
+                <Form.Label>Amount Rs.</Form.Label>
+                <br />
+                {appData?.transactionAmount}
+              </Form.Group>
+            </Form>
+          </Card.Body>
+        </Card>
 
-				<Card>
-					<CardHeader>Ph.D. Programme</CardHeader>
-					<Card.Body>PHD</Card.Body>
-				</Card>
+        <Card>
+          <CardHeader>Ph.D. Programme Type</CardHeader>
+          <Card.Body>{appData?.programmeType}</Card.Body>
+        </Card>
 
-				<Card>
-					<CardHeader>Personal Details</CardHeader>
-					<Card.Body>
-						<Row>
-							<Col>
-								<Form.Group className="mb-3">
-									<Form.Label>
-										Name of the Candidate[as in Qualifying degree certificate]
-										<span style={{ color: "red" }}>*</span>
-									</Form.Label>
-									<br />
-									Vivek D Kapadia
-								</Form.Group>
-							</Col>
-						</Row>
-						<Form>
-							<Form.Label>
-								Gender
-								<span style={{ color: "red" }}>*</span> :
-							</Form.Label>
-							<br />
-							MALE
-						</Form>
-						<hr />
-						<Form>
-							<Form.Label column="lg" lg={2}>
-								Address Details
-								<span style={{ color: "red" }}>*</span>
-							</Form.Label>
-							<br />
-							Address Line 1
-							<br />
-							Address Line 1
-							<br />
-							City
-							<br />
-							Pin Code
-							<br />
-							State
-							<br />
-							India
-						</Form>
-					</Card.Body>
-				</Card>
+        <Card>
+          <CardHeader>Ph.D. Programme</CardHeader>
+          <Card.Body>{appData?.programme}</Card.Body>
+        </Card>
 
-				<Card>
-					<CardHeader>Details of Academic Records</CardHeader>
-					<Card.Body>
-						Master Degree completed with &gt; 60%
-						<br />
-						<br />
-						<Form.Label>Qualifying Degree Name : </Form.Label>
-						<br />
-						CSE
-						<br />
-						<Form.Label>University Name : </Form.Label>
-						<br />
-						Charusat
-						<br />
-						<Form.Label>Year of Passing : </Form.Label>
-						<br />
-						2021
-						<br />
-						<Form.Label>% or CGPA : </Form.Label>
-						<br />
-						9.8
-						<br />
-					</Card.Body>
-				</Card>
+        <Card>
+          <CardHeader>Personal Details</CardHeader>
+          <Card.Body>
+            <Row>
+              <Col>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    Name of the Candidate[as in Qualifying degree certificate]
+                    <span style={{ color: "red" }}>*</span>
+                  </Form.Label>
+                  <br />
+                  {appData?.name}
+                </Form.Group>
+              </Col>
+            </Row>
+            <Form>
+              <Form.Label>
+                Gender
+                <span style={{ color: "red" }}>*</span> :
+              </Form.Label>
+              <br />
+              {appData?.gender}
+            </Form>
+            <hr />
+            <Form>
+              <Form.Label column="lg" lg={2}>
+                Address Details
+                <span style={{ color: "red" }}>*</span>
+              </Form.Label>
+              <br />
+              {appData?.addressLine1}
+              <br />
+              {appData?.addressLine2}
+              <br />
+              {appData?.city}
+              <br />
+              {appData?.pincode}
+              <br />
+              {appData?.state}
+              <br />
+              {appData?.country}
+            </Form>
+          </Card.Body>
+        </Card>
 
-				<Card>
-					<CardHeader>National Eligibility Test</CardHeader>
-					<Card.Body>
-						YES
-						<br />
-						<br />
-						<Form.Label>Name of Examination : </Form.Label>
-						<br />
-						University Externals
-						<br />
-						<br />
-						<Form.Label>Score/Percentile : </Form.Label>
-						<br />
-						80
-						<br />
-						<Form.Label>Validity Period (If Applicable) : </Form.Label>
-						<br />
-						6 months
-						<br />
-					</Card.Body>
-				</Card>
-			</div>
+        <Card>
+          <CardHeader>Details of Academic Records</CardHeader>
+          <Card.Body>
+            {appData?.degreeStatus}
+            <br />
+            <br />
+            <Form.Label>Qualifying Degree Name : </Form.Label>
+            <br />
+            {appData?.academicRecords[0].degree}
+            <br />
+            <Form.Label>University Name : </Form.Label>
+            <br />
+            {appData?.academicRecords[0].university}
+            <br />
+            <Form.Label>Year of Passing : </Form.Label>
+            <br />
+            {appData?.academicRecords[0].yearOfPassing}
+            <br />
+            <Form.Label>% or CGPA : </Form.Label>
+            <br />
+            {appData?.academicRecords[0].cgpa}
+            <br />
+          </Card.Body>
+        </Card>
 
-			<div className="footer">
-				<p style={{ margin: "0" }}>CHARUSAT - PhD Admission Portal</p>
-			</div>
-		</>
-	);
+        <Card>
+          <CardHeader>National Eligibility Test</CardHeader>
+          <Card.Body>
+            {appData?.netStatus}
+            <br />
+            <br />
+            <Form.Label>Name of Examination : </Form.Label>
+            <br />
+            {appData?.netRecords[0].examName}
+            <br />
+            <br />
+            <Form.Label>Score/Percentile : </Form.Label>
+            <br />
+            {appData?.netRecords[0].score}
+            <br />
+            <Form.Label>Validity Period (If Applicable) : </Form.Label>
+            <br />
+            {appData?.netRecords[0].validity}
+            <br />
+          </Card.Body>
+        </Card>
+      </div>
+
+      <div className="footer">
+        <p style={{ margin: "0" }}>CHARUSAT - PhD Admission Portal</p>
+        <p
+          style={{
+            fontSize: "0.7em",
+          }}
+        >
+          Made by G16 - 19CE044,55,97,127,141
+        </p>
+      </div>
+    </>
+  );
 };
 
-export default Home;
+export default Display;

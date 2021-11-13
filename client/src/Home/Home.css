@@ -1,11 +1,18 @@
 .card-container {
-  min-width: 60vw;
-  max-width: 70vw;
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0;
 }
 
 .card {
+  min-width: 60vw;
+  max-width: 60vw;
   margin-bottom: 30px;
+}
+
+.navbar > .container-fluid {
+  margin: 0 170px;
 }
 
 .pay {
@@ -30,4 +37,15 @@
 .upload {
   margin-left: 200px;
   margin-top: 20px;
+}
+
+.footer {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  background-color: black;
+  text-align: center;
 }

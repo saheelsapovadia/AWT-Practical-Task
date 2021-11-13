@@ -43,15 +43,15 @@ const applicationSchema = mongoose.Schema(
       required: true,
     },
     transactionAmount: {
-      type: Number,
-      default: 1500,
+      type: String,
+      default: "1500",
       required: true,
     },
-    programType: {
+    programmeType: {
       type: String,
       required: true,
     },
-    program: {
+    programme: {
       type: String,
       required: true,
     },

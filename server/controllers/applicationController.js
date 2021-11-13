@@ -7,16 +7,17 @@ const createApplication = asyncHandler(async (req, res) => {
     transactionNumber,
     transactionDate,
     transactionAmount,
-    programType,
-    program,
+    programmeType,
+    programme,
     degreeStatus,
     academicRecords,
     netStatus,
     netRecords,
   } = req.body;
 
-  if (!personalDetails || !transactionNumber || !programType || !program) {
-    res.status(400);
+  console.log(req.body);
+  if (false) {
+    res.status(444);
     throw new Error("Please provide all the required fields");
   } else {
     const application = new Application({
@@ -31,8 +32,8 @@ const createApplication = asyncHandler(async (req, res) => {
       transactionNumber: transactionNumber,
       transactionDate: transactionDate,
       transactionAmount: transactionAmount,
-      programType: programType,
-      program: program,
+      programmeType: programmeType,
+      programme: programme,
       degreeStatus: degreeStatus,
       academicRecords: academicRecords,
       netStatus: netStatus,

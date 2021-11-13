@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Form,
   Button,
@@ -47,6 +47,7 @@ const Home = () => {
   });
   const [declaration, setDeclaration] = useState(); //bool
 
+  const [appId, setAppId] = useState("");
   const onSubmitHandler = () => {
     toast.promise(
       axios({
@@ -65,8 +66,9 @@ const Home = () => {
           netRecords: netRecords,
           declaration: declaration,
         },
-      }).then(async (response) => {
+      }).then((response) => {
         console.log("response: ", response);
+        setAppId(response.data._id);
       }),
       {
         loading: "Submitting...", //when posting
@@ -81,6 +83,15 @@ const Home = () => {
       }
     );
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (appId !== "") {
+        console.log(appId);
+        alert(`Your application Submitted and your id is: ${appId}`);
+      }
+    }, 1500);
+  }, [appId]);
 
   return (
     <>
